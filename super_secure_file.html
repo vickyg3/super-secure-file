@@ -131,7 +131,7 @@
         return JSON.stringify(encrypted_data);
       }
 
-      function close() {
+      function closeIt() {
         $("#wrapper").html("<h1>&nbsp;</h1><p>Bye bye! :-)</p>");
       }
 
@@ -276,7 +276,7 @@
           <br/>
           <button class="btn btn-primary" id="save" onclick="save(false);" style="display:none;">Save</button>
           <button class="btn btn-primary" id="saveclose" onclick="save(true);" style="display:none;">Save and Close</button>
-          <button class="btn btn-primary" id="close" onclick="close();" style="display:none;">Close</button>
+          <button class="btn btn-primary" id="close" onclick="closeIt();" style="display:none;">Close</button>
           <button class="btn btn-info" id="authorizeButton" style="display: none;" onclick="authorize();">Sign in to Google Drive</button>
         </p>
       </div>
