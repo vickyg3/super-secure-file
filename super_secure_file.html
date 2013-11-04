@@ -69,6 +69,7 @@
               $("#modalWait").modal('hide');
               $("#save").show();
               $("#saveclose").show();
+              $("#close").show();
             } else {
               // get the file
               fileId = resp.items[0].id;
@@ -129,6 +130,10 @@
         return JSON.stringify(encrypted_data);
       }
 
+      function close() {
+        $("#wrapper").html("<h1>&nbsp;</h1><p>Bye bye! :-)</p>");
+      }
+
       function doSave() {
         $("#modalSaving").modal("show");
         var data = encrypt();
@@ -140,7 +145,7 @@
           $("#modalSaving").modal("hide");
           $("#status").html("Saved Successfully!");
           if (shouldClose) {
-            $("#wrapper").html("<h1>&nbsp;</h1><p>Saved Successfully, bye bye! :-)</p>")
+            $("#wrapper").html("<h1>&nbsp;</h1><p>Saved Successfully, bye bye! :-)</p>");
           }
         });
       }
@@ -243,12 +248,12 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="javascript:void(0);">Super Secure File!</a>
+          <a class="navbar-brand" href="http://secure.foamsnet.com">Super Secure File!</a>
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
             <li><a href="how.html">How It Works?</a></li>
-            <li><a href="contact.html">Contact</a></li>
+            <li><a href="credits.html">Credits</a></li>
           </ul>
         </div>
       </div>
@@ -270,11 +275,12 @@
           <br/>
           <button class="btn btn-primary" id="save" onclick="save(false);" style="display:none;">Save</button>
           <button class="btn btn-primary" id="saveclose" onclick="save(true);" style="display:none;">Save and Close</button>
+          <button class="btn btn-primary" id="close" onclick="close();" style="display:none;">Close</button>
           <button class="btn btn-info" id="authorizeButton" style="display: none;" onclick="authorize();">Sign in to Google Drive</button>
         </p>
       </div>
 
-    </div><!-- /.container -->
+    </div>
 
     <div class="modal fade" id="modalAlert" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-dialog">

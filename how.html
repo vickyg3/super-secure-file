@@ -1,0 +1,47 @@
+<html>
+  <head>
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+    <title>Super Secure File!</title>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.1/js/bootstrap.min.js"></script>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.1/css/bootstrap.min.css" rel="stylesheet">
+  </head>
+  <body>
+     <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="http://secure.foamsnet.com">Super Secure File!</a>
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="how.html">How It Works?</a></li>
+            <li><a href="credits.html">Credits</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="starter-template" id="wrapper">
+        <h1>&nbsp;</h1>
+        <p class="lead" id="status">How does it work?</p>
+        <p>
+          It makes use of Google Drive for storing your data (in an encrypted format). All the encryption and decryption is done locally and the key (the password that you type to protect the file) will never leave your local machine. In fact once you close the tab, nobody knows the password but you (and Chuck Norris, of course!). The encrypted file created on Google Drive is named 'super_secret_file'. Be sure not to delete it unless you want to lose your super secret information.
+        </p>
+        <p>
+          For the technically minded, this app uses a simple trick to tell the user if (s)he is entering the correct password or not. It encrypts a known plain text with the supplied password and decrypts it to check if it matches the known plain text.
+        </p>
+        <p>
+          Also, if you are interested in verifying if whatever the above paragraph claims is true, please feel free to examine the code. If there are any possible vulnerabilites, I'll be more than happy to hear feedbacks about it. The site is merely hosted as a github page and the source can be found here: <a href="https://github.com/vickyg3/super-secure-file" target="_blank">https://github.com/vickyg3/super-secure-file</a>
+        </p>
+      </div>
+
+    </div>
+  </body>
+</html>

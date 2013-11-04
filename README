@@ -1,0 +1,14 @@
+Super Secure File
+
+Get a super secure file encrypted locally using a specified password and access it anywhere by just knowing the password. It makes use of Google Drive to store the encrypted data and does all the cryptography locally (the key never leaves your computer).
+
+Any analysis is welcome. I'll be more than happy to learn the potential vulnerabilities in implementation.
+
+This repo has been hosted as a Github Page here: http://secure.foamsnet.com
+
+
+NOTE:
+  
+All the code in this project is under Creative Commons Public Domain License: http://creativecommons.org/publicdomain/zero/1.0/
+
+Anyone who is submitting Pull Requests to be merged into this project should be willing to publish their code under the same license too.
