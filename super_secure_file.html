@@ -9,6 +9,8 @@
       var cryptData;
       var validPassword = "";
       var shouldClose = false;
+      var timer;
+      var timeRemaining = 300;
 
       // Json Formatter to Stringify and Parse the CipherParams object
       var JsonFormatter = {
@@ -70,6 +72,8 @@
               $("#save").show();
               $("#saveclose").show();
               $("#close").show();
+              $('#shrink').show();
+              $('#expand').show();
             } else {
               // get the file
               fileId = resp.items[0].id;
@@ -93,10 +97,61 @@
         }
       }
 
+      function expandCreditCardNumbers() {
+        var text = $('#data').val();
+        var re = /[0-9]{16}/g;
+        var pos = -1;
+        while ((pos = text.search(re)) != -1) {
+          cardNum = text.match(re)[0];
+          spacedCardNum = '';
+          for (var i = 0; i < 4; i++) {
+            spacedCardNum += cardNum.substring(i * 4, i * 4 + 4);
+            if (i != 3)
+              spacedCardNum += ' ';
+          }
+          text = text.replace(cardNum, spacedCardNum);
+        }
+        $('#data').val(text);
+      }
+
+      function shrinkCreditCardNumbers() {
+        var text = $('#data').val();
+        var re = /[0-9]{4} +[0-9]{4} +[0-9]{4} +[0-9]{4}/g;
+        var pos = -1;
+        while ((pos = text.search(re)) != -1) {
+          spacedCardNum = text.match(re)[0];
+          cardNum = spacedCardNum.replace(/ /g, '');
+          text = text.replace(spacedCardNum, cardNum);
+        }
+        $('#data').val(text);
+      }
+
       function authorize() {
         gapi.auth.authorize(
           {'client_id': CLIENT_ID, 'scope': SCOPES, 'immediate': false},
           handleAuthResult);
+      }
+
+      function doCountdown() {
+        var wstr = "";
+        wstr += "This page will automatically close in " + timeRemaining + " seconds (all changes will be lost).";
+        wstr += " <a href=\"javascript:void(0);\" onclick=\"extendTimer();\">Extend</a>";
+        wstr += " | <a href=\"javascript:void(0);\" onclick=\"stopTimer();\">Stop</a>";
+        $('#countdown').html(wstr);
+        --timeRemaining;
+        if (timeRemaining == 0) {
+          clearInterval(timer);
+          closeIt();
+        }
+      }
+
+      function extendTimer() {
+        timeRemaining += 60;
+      }
+
+      function stopTimer() {
+        clearInterval(timer);
+        $('#countdown').html('');
       }
 
       function checkPassword() {
@@ -116,7 +171,10 @@
           $("#save").show();
           $("#saveclose").show();
           $("#close").show();
+          $('#shrink').show();
+          $('#expand').show();
           $("#unlock").hide();
+          timer = setInterval(doCountdown, 1000);
         }
       }
 
@@ -265,6 +323,7 @@
       <div class="starter-template" id="wrapper">
         <h1>&nbsp;</h1>
         <p class="lead" id="status"></p>
+        <p id="countdown"></p>
         <p>
           <form class="form-inline" onsubmit="return false;">
             <div id="password_area" style="display:none;" class="form-group">
@@ -276,7 +335,9 @@
           <br/>
           <button class="btn btn-primary" id="save" onclick="save(false);" style="display:none;">Save</button>
           <button class="btn btn-primary" id="saveclose" onclick="save(true);" style="display:none;">Save and Close</button>
-          <button class="btn btn-primary" id="close" onclick="closeIt();" style="display:none;">Close</button>
+          <button class="btn btn-primary" id="close" onclick="closeIt();" style="display:none;">Close</button><br/><br/>
+          <button class="btn btn-primary" id="expand" onclick="expandCreditCardNumbers();" style="display:none;">Expand Credit Card Numbers</button>
+          <button class="btn btn-primary" id="shrink" onclick="shrinkCreditCardNumbers();" style="display:none;">Shrink Credit Card Numbers</button>
           <button class="btn btn-info" id="authorizeButton" style="display: none;" onclick="authorize();">Sign in to Google Drive</button>
         </p>
       </div>
